@@ -1,9 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>github多帐号添加ssh公钥</title>
+    <url>/2020/02/09/develop/github%E5%A4%9A%E5%B8%90%E5%8F%B7%E6%B7%BB%E5%8A%A0SSH%E5%85%AC%E9%92%A5/</url>
+    <content><![CDATA[<p>github有两个账号，但是同一个ssh公钥只能添加给一个账号，需要再生成一个密匙后添加。步骤如下：</p>
+<h2 id="再添加一个ssh密匙"><a href="#再添加一个ssh密匙" class="headerlink" title="再添加一个ssh密匙"></a>再添加一个ssh密匙</h2><p>1、指定邮箱</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -b 4096 -C <span class="string">"your_email@example.com"</span></span><br><span class="line">Generating public/private rsa key pair.</span><br></pre></td></tr></table></figure>
+
+<p>2、提示输入生成位置和文件名，取个不同的名称。如: /Users/you/.ssh/id_rsa1</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Enter file <span class="keyword">in</span> swhich to save the key (/Users/you/.ssh/id_rsa):</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<p>3、输入密码，不用设置，一路回车到完成，生成的文件为：<code>/Users/you/.ssh/id_rsa1</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Enter passphrase (empty <span class="keyword">for</span> no passphrase):</span><br><span class="line">Enter same passphrase again: </span><br><span class="line">The key fingerprint is:</span><br><span class="line">SHA256:HlteuP6zblxHGjEFh9hLohazijWnxO/aJx0zimpy0lY your_email@example.com</span><br><span class="line">The key<span class="string">'s randomart image is:</span></span><br><span class="line"><span class="string">+---[RSA 2048]----+</span></span><br><span class="line"><span class="string">|              ++.|</span></span><br><span class="line"><span class="string">|           o oo+.|</span></span><br><span class="line"><span class="string">|        .   = ooo|</span></span><br><span class="line"><span class="string">|         = *  ...|</span></span><br><span class="line"><span class="string">|        S X .  + |</span></span><br><span class="line"><span class="string">|       o E + +o .|</span></span><br><span class="line"><span class="string">|      . + =.o.+. |</span></span><br><span class="line"><span class="string">|     o = o =+o   |</span></span><br><span class="line"><span class="string">|      *.. o=Bo   |</span></span><br><span class="line"><span class="string">+----[SHA256]-----+</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="生成的ssh公钥添加到github"><a href="#生成的ssh公钥添加到github" class="headerlink" title="生成的ssh公钥添加到github"></a>生成的ssh公钥添加到github</h2><p>复制出生成的ssh公钥</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pbcopy &lt; /Users/you/.ssh/id_rsa1.pub</span><br></pre></td></tr></table></figure>
+
+<p>github网站setting的SSH and GPG keys新建一个key粘进去</p>
+<h2 id="ssh-config文件里添加一个host"><a href="#ssh-config文件里添加一个host" class="headerlink" title="ssh config文件里添加一个host"></a>ssh config文件里添加一个host</h2><p>ssh目录没config文件，新建一个</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Host github1</span><br><span class="line">  HostName github.com</span><br><span class="line">  User git</span><br><span class="line">  IdentityFile ~/.ssh/id_rsa1</span><br></pre></td></tr></table></figure>
+
+<h2 id="修改仓库地址"><a href="#修改仓库地址" class="headerlink" title="修改仓库地址"></a>修改仓库地址</h2><p>第二个账号的git地址中<code>git@github.com</code>都改为<code>github1</code>，如：<code>git@github.com:you/your-repo.git</code>变为<code>github1:you/your-repo.git</code></p>
+<p>添加仓库</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote add origin github1:you/your-repo.git</span><br></pre></td></tr></table></figure>
+
+<p>修改仓库地址</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote <span class="built_in">set</span>-url origin github1:you/your-repo.git</span><br></pre></td></tr></table></figure>
+
+
+
+]]></content>
+      <categories>
+        <category>develop</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hello World</title>
     <url>/2020/02/09/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<a id="more"></a>
+
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
 
 <p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
@@ -17,5 +58,8 @@
 
 <p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
 ]]></content>
+      <categories>
+        <category>develop</category>
+      </categories>
   </entry>
 </search>
