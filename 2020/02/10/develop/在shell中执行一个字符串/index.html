@@ -160,6 +160,9 @@
 
 
     <div id="comments" class="post-comments"></div>
+
+<script src="/js/md5.min.js"></script>
+
 <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
 <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
 <script type="text/javascript">
@@ -169,7 +172,7 @@
         repo: 'g021.github.io',
         owner: 'g021',
         admin: ['g021'],
-        id: decodeURI(window.location.pathname),
+        id: md5(decodeURI(window.location.pathname)),
         distractionFreeMode: 'false',
         language: 'zh-CN',
         perPage: parseInt('10', 10)
