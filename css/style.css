@@ -1266,10 +1266,7 @@ header {
     padding: 10px 0; }
     header .logo {
       margin-right: 0;
-      max-width: 80px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis; }
+      white-space: nowrap; }
     header .menu {
       position: absolute;
       clip: rect(0 0 0 0);
